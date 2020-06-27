@@ -73,10 +73,10 @@ namespace Docu3cDemoWeb.Controllers
         public IActionResult recognize(string file)
         {
             AzureFormRecog afr = new AzureFormRecog();
-            var t1 = afr.RecognizeReceipt(file);
-            Task.WaitAll(t1);
+            //var t1 = afr.RecognizeReceipt(file);
+            //Task.WaitAll(t1);
 
-            ViewBag.ResultHTML = t1.Result;
+            ViewBag.ResultHTML = "";//t1.Result;
             return View("Recognize");
         }
 
@@ -85,10 +85,10 @@ namespace Docu3cDemoWeb.Controllers
         {
             string modelid = "31dc74ed-a341-4ea3-ad5e-7a4e2c6597c8";
             AzureFormRecog afr = new AzureFormRecog();
-            var t1 = afr.AnalyzePdfForm(modelid,file);
-            Task.WaitAll(t1);
+            //var t1 = afr.AnalyzePdfForm(modelid,file);
+            //Task.WaitAll(t1);
 
-            ViewBag.ResultHTML = t1.Result;
+            ViewBag.ResultHTML = "";// t1.Result;
             return View("Analyze");
         }
 

@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Text;
-using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using System.Data;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Docu3cDemoWeb
 {
@@ -97,7 +97,33 @@ namespace Docu3cDemoWeb
             return fileinfo;
         }
 
-        public Dictionary<string, string> ClassifyFile(string fID, string ftype)
+        public void SaveFileProperties(string pID, string fID,List<docu3c> docs)
+        {
+            string binfile = _env.WebRootPath + "/data/" + pID + "/" + fID + ".bin";
+            IFormatter formatter = new BinaryFormatter();
+            if (File.Exists(binfile)) File.Delete(binfile);
+
+            using (Stream stream = new FileStream(binfile, FileMode.Create, FileAccess.Write))
+            {
+                formatter.Serialize(stream, docs);
+            }
+        }
+
+        public List<docu3c> GetFileProperties(string pID, string fID)
+        {
+            string binfile = _env.WebRootPath + "/data/" + pID + "/" + fID + ".bin";
+            List<docu3c> docs = new List<docu3c>();
+            if (!File.Exists(binfile)) return docs;
+
+            IFormatter formatter = new BinaryFormatter();
+            using (Stream stream = new FileStream(binfile, FileMode.Open, FileAccess.Read))
+            {
+                docs = (List<docu3c>)formatter.Deserialize(stream);
+            }
+            return docs;
+        }
+
+        public Dictionary<string, string> SaveFileClassification(string fID, string ftype)
         {
             Dictionary<string, string> fileinfo = new Dictionary<string, string>();
             var ds = InitDatSet();
