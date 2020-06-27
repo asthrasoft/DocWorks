@@ -20,15 +20,15 @@ namespace Docu3cDemoWeb
         public string docType;
         public string docModelID;
         public string docParseErrorMsg;
-        public docu3cProps docProps;
+        public Dictionary<string,docu3cProp> docProps;
     }
-    public class docu3cProps
+    public class docu3cProp
     {
         public string Name;
         public string Label;
         public string Value;
         public float Confidence;
-        public docu3cProps Child;
+        public docu3cProp Child;
     }
     public class docu3cAPI
     {
@@ -55,13 +55,15 @@ namespace Docu3cDemoWeb
                     doc.docID = formUri;
                     doc.docURL = formUri;
                     doc.docType = form.FormType;
+                    doc.docProps = new Dictionary<string, docu3cProp>();
                     foreach (FormField field in form.Fields.Values)
                     {
-                        docu3cProps prop = new docu3cProps();
+                        docu3cProp prop = new docu3cProp();
                         prop.Name = field.Name;
                         if (field.LabelText != null) prop.Label = field.LabelText;
                         if (field.ValueText != null) prop.Value = field.ValueText;
                         prop.Confidence = field.Confidence;
+                        doc.docProps.Add(field.Name,prop);
                     }
                     docs.Add(doc);
                 }
@@ -79,6 +81,7 @@ namespace Docu3cDemoWeb
         private string GetModelID(string doc_type)
         {
             Dictionary<string, string> kv = new Dictionary<string, string>();
+            kv.Add("doc", "6c74493b-bc11-4dc1-a042-f14251dcbc12");
             kv.Add("drivers_lic", "31dc74ed-a341-4ea3-ad5e-7a4e2c6597c8");
 
             return kv[doc_type];

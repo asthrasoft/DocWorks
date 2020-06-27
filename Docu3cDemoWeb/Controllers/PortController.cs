@@ -1,5 +1,6 @@
 ﻿//https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/quickstarts/client-library?tabs=windows&pivots=programming-language-csharp
 //https://github.com/microsoft/OCR-Form-Tools
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
@@ -11,11 +12,9 @@ namespace Docu3cDemoWeb.Controllers
     public class PortController : Controller
     {
         private readonly IWebHostEnvironment _env;
-        private readonly ILogger<PortController> _logger;
 
-        public PortController(ILogger<PortController> logger, IWebHostEnvironment env)
+        public PortController(IWebHostEnvironment env)
         {
-            _logger = logger;
             _env = env;
         }
 
@@ -82,15 +81,20 @@ namespace Docu3cDemoWeb.Controllers
         }
 
         [Route("identify/{pid?}/{fid?}")]
-        public IActionResult IdentifyFile(string pid, string fid)
+        public async Task<IActionResult> IdentifyFile(string pid, string fid)
         {
 
             DSActions dsa = new DSActions(_env);                      
             var fi = dsa.GetFileInfo(fid);
             ViewBag._file = fi["path"];
-
+            
             //ML Action to identify DocType
-            string _type = "Drivers_License";
+            docu3cAPI d3 = new docu3cAPI();
+            var url = HttpContext.Request.Host.ToString();
+            string fileurl = url + fi["path"];
+            var docinfo = await d3.ParseDocument("doc", fileurl);
+            string _type = docinfo[0].docProps["docType"].Value.ToString();
+            _type = _type.Replace(" ", "_");
 
             ViewBag._doctype = _type;
             string _html = "<h3 class='text-warning'>Classification : " + _type + "</h3>" +
