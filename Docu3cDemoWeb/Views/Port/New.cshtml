@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Html;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid">
+    <main role="main" class="px-4 bg-light">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h4>Portfolio Details</h4>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-md-12 portfolio-item">
+                <div class="card border-secondary">
+                    <form role="form" action="/Port/Save" method="post">
+                        <div class="card-header text-white bg-secondary">Portfolio Info</div>
+                        <div class="p-3">
+
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Portfolio Name</label>
+                                    <input type="text" class="form-control" id="txtpName" name="pname" placeholder="Enter name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Customer Name</label>
+                                    <input type="text" class="form-control" id="txtcName" name="cname" placeholder="Enter name">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer bg-light">
+                            <button class="btn btn-primary float-right" type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 portfolio-item">
+                <div class="card border-secondary">
+                    <div class="card-header text-white bg-secondary">Portfolio Summary</div>
+                    <div class="list-group no-gutters">
+                        <a href="#" class="list-group-item list-group-item-action  py-1">
+                            <p class="mb-0">Documents <span class="pull-right">0/100</span></p>
+                            <!--<small class="mx-0">Validity Jun-2017</small>-->
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action  py-1">
+                            <p class="mb-0">Classify <span class="pull-right">0/100</span></p>
+                            <!--<small class="mx-0">Validity Jun-2017</small>-->
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action  py-1">
+                            <p class="mb-0">Comply <span class="pull-right">0/100</span></p>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action  py-1">
+                            <p class="mb-0">Comprehend <span class="pull-right">0/100</span></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>

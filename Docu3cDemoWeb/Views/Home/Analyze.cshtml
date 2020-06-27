@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNetCore.Html;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center1">
+    <h1 class="display-4">Welcome to the Form Recognizer</h1>
+    <form action="/home/analyze" method="post">
+        <label for="URL">File:</label>
+        <input type="text" id="file" style="width:500px" name="file" value="https://docworksstore.blob.core.windows.net/docstore/fott/dls/Zula%20M%20Emerson_.pdf?sv=2019-10-10&ss=bqtf&srt=sco&sp=rwdlacuptfx&se=2020-06-26T11:58:35Z&sig=Lp3T8kvEXMrHkDaCR1d%2FPK%2FWQYraBhOTh%2BUXZ1DsyRs%3D&_=1593143925513"><br><br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    @foreach (string s in ViewBag.ResultHTML)
+    {
+        <div>@(new HtmlString(s))</div>;
+    }
+</div>

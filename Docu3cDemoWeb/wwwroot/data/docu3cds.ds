@@ -1,0 +1,57 @@
+<?xml version="1.0" standalone="yes"?>
+<docu3c>
+  <portfolio>
+    <pID>1593275383</pID>
+    <pName>P01</pName>
+    <cName>C01</cName>
+    <docCount>0</docCount>
+    <Classify>0</Classify>
+    <Comply>0</Comply>
+    <Comprehend>0</Comprehend>
+  </portfolio>
+  <portfolio>
+    <pID>1593283078</pID>
+    <pName>P02</pName>
+    <cName>C02</cName>
+    <docCount>0</docCount>
+    <Classify>0</Classify>
+    <Comply>0</Comply>
+    <Comprehend>0</Comprehend>
+  </portfolio>
+  <file>
+    <fID>15466694</fID>
+    <pID>1593283078</pID>
+    <fName>Adrian T Clemens.pdf</fName>
+    <fType>Drivers_License</fType>
+  </file>
+  <file>
+    <fID>15466695</fID>
+    <pID>1593283078</pID>
+    <fName>Alan C Wages.pdf</fName>
+    <fType>Drivers_License</fType>
+  </file>
+  <file>
+    <fID>15466696</fID>
+    <pID>1593283078</pID>
+    <fName>Albert G Johnson.pdf</fName>
+    <fType>UNKNOWN</fType>
+  </file>
+  <file>
+    <fID>15466846</fID>
+    <pID>1593275383</pID>
+    <fName>Alan C Wages.pdf</fName>
+    <fType>UNKNOWN</fType>
+  </file>
+  <file>
+    <fID>15466847</fID>
+    <pID>1593275383</pID>
+    <fName>Albert G Johnson.pdf</fName>
+    <fType>UNKNOWN</fType>
+  </file>
+  <file>
+    <fID>15466848</fID>
+    <pID>1593275383</pID>
+    <fName>Zula M Emerson.pdf</fName>
+    <fType>UNKNOWN</fType>
+  </file>
+</docu3c>

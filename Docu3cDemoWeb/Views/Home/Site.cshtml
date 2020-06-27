@@ -1,0 +1,118 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Docu3cDemo</title>
+    <script src="/coreui/dist/js/coreui.js"></script>
+    <link rel="stylesheet" href="/coreui/dist/css/coreui.css">
+    <link rel="stylesheet" href="/coreui/icons/css/free.css">
+    <link rel="stylesheet" href="/coreui/icons/css/brand.css">
+    <link rel="stylesheet" href="/coreui/icons/css/flag.css">
+    <link rel="stylesheet" href="/coreui/icons/css/all.css">
+    <!--[if IE]><!-->
+    @*<script src="~/wwwroot/coreui/icons/js/svgxuse.min.js"></script>*@
+    <link rel="shortcut icon" href="https://static.wixstatic.com/media/8ba3de_bb65a36e9b9a45e5b726692532ec60fb%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/8ba3de_bb65a36e9b9a45e5b726692532ec60fb%7Emv2.png" />
+</head>
+<body class="c-app align-content-center" style="background-color:#2F3082">
+    <form action="/Home/Index" method="post" class="needs-validation" novalidate>
+        @using (Html.BeginForm())
+        {
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-center flex-wrap" style="margin-top:10%;">
+                    <div class="col-md-8" style="background-color:#2F3082">
+                        <div class="card-group">
+                            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%;background-color:#68BCE8">
+                                <div class="card-body text-center">
+                                    <div>
+                                        <h1>Automate Compliance <br /> for financial Services</h1>
+                                        <a href="https://marketingai.io/" target="_blank">
+                                            <img src="/Content/Images/Illustration.png" width="90%" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card p-4">
+                                <div class="card-body">
+                                    <img src="/Content/Images/TranspBG.png" width="95%" height="35%" />
+                                    <h2 class="text-center text-muted mb-3 ">  Sign In to get started</h2>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <svg class="c-icon">
+                                                    <use xlink:href="/coreui/icons/free.svg#cil-user"></use>
+                                                </svg>
+
+                                            </span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="UserID" name="Emailid" id="validationCustom01" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the UserID.
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <svg class="c-icon">
+                                                    <use xlink:href="/coreui/icons/free.svg#cil-lock-locked"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <input class="form-control" type="password" placeholder="Password" name="password" id="validationCustom02" aria-describedby="passwordHelpBlock" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the password.
+                                        </div>
+
+                                    </div>
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                        Your password must be 4-20 characters long, contain letters and numbers, and must not contain spaces or emoji.
+                                    </small><br />
+                                    <div class="row">
+                                        <div class="col-md-12 content-center ">
+                                            <button class="btn btn-primary font-weight-bold " style="background-color:#2F3082;width:80%;font-size:20px;" type="submit">Sign In</button>
+                                        </div>
+                                        <div class="col-md-12 content-center m-1 text-primary font-weight-bold  ">
+                                            Forgot password ?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CoreUI and necessary plugins-->
+            <script src="/coreui/dist/js/coreui.js"></script>
+            <!--[if IE]><!-->
+            <script src="/coreui/icons/js/svgxuse.js"></script>
+            <!--<![endif]-->
+            <script>
+                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                (function () {
+                    'use strict';
+                    window.addEventListener('load', function () {
+                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                        var forms = document.getElementsByClassName('needs-validation');
+                        // Loop over them and prevent submission
+                        var validation = Array.prototype.filter.call(forms, function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            }, false);
+                        });
+                    }, false);
+                })();
+            </script>
+        }
+    </form>
+</body>
+</html>
+

@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docu3cDemo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+
+    <link rel="shortcut icon" href="https://static.wixstatic.com/media/8ba3de_bb65a36e9b9a45e5b726692532ec60fb%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/8ba3de_bb65a36e9b9a45e5b726692532ec60fb%7Emv2.png" />
+    <link rel="stylesheet" href="/coreui/dist/css/coreui.min.css">
+    <link rel="stylesheet" href="/coreui/dist/css/sidebar.min.css">
+    <link rel="stylesheet" href="/Content/dataTables.bootstrap4.min.css" />
+    <link href="/Content/Site.css" rel="stylesheet" />
+
+    <script src="/Scripts/jquery-3.3.1.slim.js"></script>
+    <script src="/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+    <script src="/Scripts/jquery.dataTables.min.js"></script>
+    <script src="/Scripts/clipboard.min.js"></script>
+    <script src="/Scripts/dataTables.bootstrap4.min.js"></script>
+    <script src="/coreui/dist/js/coreui.js"></script>
+    <script src="/coreui/js/dist/popover.js"></script>
+    <script src="/coreui/js/dist/tooltip.js"></script><!-- HTML to write -->
+</head>
+<body class="c-app" style="background-color:#fff!important">
+
+    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar" style="background-color:#2F3082">
+        <div class="c-sidebar-brand d-lg-down-none" style="background-color:#fff">
+            <img src="/Content/Images/WhiteBG.JPG" width="75%" height="70%" />
+
+        </div>
+        <ul class="c-sidebar-nav">
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="@Url.Action("Index", "Home")">
+                    <svg class="c-sidebar-nav-icon">
+                        <use xlink:href="/coreui/icons/free.svg#cil-briefcase"></use>
+                    </svg>
+                    Dashboard
+                </a>
+            </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="@Url.Action("Index", "Port")">
+                    <svg class="c-sidebar-nav-icon">
+                        <use xlink:href="/coreui/icons/free.svg#cil-briefcase"></use>
+                    </svg>
+                    Portfolios
+                </a>
+            </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="#">
+                    <svg class="c-sidebar-nav-icon">
+                        <use xlink:href="/coreui/icons/free.svg#cil-briefcase"></use>
+                    </svg>
+                    Classification
+                </a>
+            </li>
+            @*<li class="c-sidebar-nav-title">Theme</li>*@
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="#">
+                    <svg class="c-sidebar-nav-icon">
+                        <use xlink:href="/coreui/icons/free.svg#cil-compass"></use>
+                    </svg> Compliance
+                </a>
+            </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="#">
+                    <svg class="c-sidebar-nav-icon">
+                        <use xlink:href="/coreui/icons/free.svg#cil-graph"></use>
+                    </svg> Comprehension
+                </a>
+            </li>
+
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="#">
+                    <svg class="c-sidebar-nav-icon">
+                        <use xlink:href="/coreui/icons/free.svg#cil-settings"></use>
+                    </svg> Settings
+                </a>
+            </li>
+
+
+
+        </ul>
+        @*<button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>*@
+    </div>
+    <div class="c-wrapper c-fixed-components">
+        <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+            <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
+                <svg class="c-icon c-icon-lg">
+                    <use xlink:href="/coreui/icons/free.svg#cil-menu"></use>
+                </svg>
+            </button><a class="c-header-brand d-lg-none" href="#">
+                <svg width="118" height="46" alt="CoreUI Logo">
+                    <use xlink:href="assets/brand/coreui.svg#full"></use>
+                </svg>
+            </a>
+            <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
+                <svg class="c-icon c-icon-lg">
+                    <use xlink:href="/coreui/icons/free.svg#cil-menu"></use>
+                </svg>
+            </button>
+            @*<ul class="c-header-nav d-md-down-none">
+                    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="@Url.Action("Dashboard", "Document")">Dashboard</a></li>
+                    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="@Url.Action("FormRecognizer", "Home")">Documents</a></li>
+                    <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="@Url.Action("Compliance", "Home")">Compliance</a></li>
+
+                    @if (Session["Role"].ToString() == "Admin")
+                    {
+                        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="@Url.Action("Get", "Home")">Users</a></li>
+                    }
+
+                </ul>*@
+            <ul class="c-header-nav ml-auto mr-4">
+                <li>
+                    <text>
+                        Welcome <b>Daniel K</b>
+                    </text>
+                </li>
+                <li class="c-header-nav-item d-md-down-none mx-2">
+                    <a class="c-header-nav-link" href="#">
+                        <svg class="c-icon">
+                            <use xlink:href="/coreui/icons/free.svg#cil-bell"></use>
+                        </svg>
+                    </a>
+                </li>
+
+                <li class="c-header-nav-item d-md-down-none mx-2">
+
+                    <a class="c-header-nav-link" href='@Url.Action("Logoff", "Home")'>
+                        <svg class="c-icon">
+                            <use xlink:href="/coreui/icons/free.svg#cil-power-standby"></use>
+                        </svg>
+                    </a>
+                </li>
+
+            </ul>
+
+        </header>
+        <div class="c-body" style="background-color:#fff!important">
+            <main class="c-main">
+                <div class="container-fluid">
+                    <!-- Main content here --> @RenderBody()
+                </div>
+            </main>
+            <div class="c-footer">
+
+                <div class="footertext" style="text-align:center;margin-top:5px;">
+                    <p>&copy; @DateTime.Now.Year - <a href="https://marketingai.io/" target="_blank">marketingAI</a>    <small>   Created at Newcastle (WA)</small></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*<div class="container body-content">*@
+    @*@RenderBody()*@
+
+
+    @*</div>*@
+
+
+</body>
+</html>

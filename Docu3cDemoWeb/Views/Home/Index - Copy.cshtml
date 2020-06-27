@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Html;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center1">
+    <h1 class="display-4">Welcome to the Form Recognizer</h1>
+    <form action="/home/" method="post">
+        <label for="URL">File:</label>
+        <input type="text" id="URL" style="width:500px" name="url" value="https://docu3cdemo.blob.core.windows.net/raw/Sample-Invoice.pdf"><br><br>
+        <input type="text" id="IMG" style="width:500px" name="img" value="https://docs.microsoft.com/azure/cognitive-services/form-recognizer/media/contoso-allinone.jpg"><br><br>
+        <button type="submit" formaction="/home/recognize">Recognize</button>
+        <button type="submit" formaction="/home/parse">Parse</button>
+    </form>
+
+    @foreach (string s in ViewBag.ResultHTML)
+    {
+        <div>@(new HtmlString(s))</div>;
+    }
+</div>

@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Html;
+@using System.Data;
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">alert(@ViewBag.Message);</script>
+}
+
+    <div class="text-center1">
+        <div class="float-right">
+            <form action="/port/@ViewBag.pID/Upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="file" multiple>
+                <button type="submit" class="btn btn-primary" name="submitbtn" id="submitbtn" style="visibility:hidden;">Upload</button>
+                <label for="submitbtn" class="btn btn-primary" id="upload" onClick="alert('Submitting');this.disabled=true;this.value='Sending…';">Upload</label>
+                @*<input type="submit" value="Upload" name="submit">*@
+            </form>
+        </div>
+        <h3 class="pl-3">Documents</h3>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Document</th>
+                        <th scope="col">Classification</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag._ds.Tables.Contains("file"))
+                    {
+                        DataRow[] drs = ViewBag._ds.Tables["file"].Select("pID = '" + ViewBag.pID + "'");
+                        @foreach (DataRow dr in drs)
+                        {
+                    <tr>
+                        <td><a href="/file/@ViewBag.pID/@dr["fID"]">@dr["fname"]</a></td>
+                        <td>
+                            <bold>@dr["fType"]</bold>
+                        </td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </td>
+                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
