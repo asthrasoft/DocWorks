@@ -18,6 +18,15 @@
     <Comply>0</Comply>
     <Comprehend>0</Comprehend>
   </portfolio>
+  <portfolio>
+    <pID>1593291961</pID>
+    <pName>PTEST01</pName>
+    <cName>CTEST01</cName>
+    <docCount>0</docCount>
+    <Classify>0</Classify>
+    <Comply>0</Comply>
+    <Comprehend>0</Comprehend>
+  </portfolio>
   <file>
     <fID>15466694</fID>
     <pID>1593283078</pID>
@@ -52,6 +61,30 @@
     <fID>15466848</fID>
     <pID>1593275383</pID>
     <fName>Zula M Emerson.pdf</fName>
+    <fType>UNKNOWN</fType>
+  </file>
+  <file>
+    <fID>15474999</fID>
+    <pID>1593291961</pID>
+    <fName>ACC_XFR_Aaron B McDaniel_.pdf</fName>
+    <fType>Client_Relationship_Agreement</fType>
+  </file>
+  <file>
+    <fID>15475000</fID>
+    <pID>1593291961</pID>
+    <fName>ACCS_STMT_Aaron B McDaniel.pdf</fName>
+    <fType>UNKNOWN</fType>
+  </file>
+  <file>
+    <fID>15475001</fID>
+    <pID>1593291961</pID>
+    <fName>CL_REL_AGRMT_Aaron B McDaniel.pdf</fName>
+    <fType>UNKNOWN</fType>
+  </file>
+  <file>
+    <fID>15475002</fID>
+    <pID>1593291961</pID>
+    <fName>DRIVERS_LIC_Aaron B McDaniel_.pdf</fName>
     <fType>UNKNOWN</fType>
   </file>
 </docu3c>

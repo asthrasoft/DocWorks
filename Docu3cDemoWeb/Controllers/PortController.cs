@@ -71,7 +71,10 @@ namespace Docu3cDemoWeb.Controllers
         {
             DSActions dsa = new DSActions(_env);
             var fi = dsa.GetFileInfo(fid);
-            ViewBag._file = fi["path"];
+            var url = HttpContext.Request.Host.ToString();
+            string fileurl = "https://" + url + fi["path"];
+
+            ViewBag._file = fileurl;
             ViewBag._doctype = fi["type"];
             string _html = "<h3>Classification : " + fi["type"].ToString()  + "</h3>";
             ViewBag._html = _html;
@@ -91,7 +94,7 @@ namespace Docu3cDemoWeb.Controllers
             //ML Action to identify DocType
             docu3cAPI d3 = new docu3cAPI();
             var url = HttpContext.Request.Host.ToString();
-            string fileurl = url + fi["path"];
+            string fileurl = "https://" + url + fi["path"];
             var docinfo = await d3.ParseDocument("doc", fileurl);
             string _type = docinfo[0].docProps["docType"].Value.ToString();
             _type = _type.Replace(" ", "_");
