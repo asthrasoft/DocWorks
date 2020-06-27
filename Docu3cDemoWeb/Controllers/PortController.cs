@@ -81,17 +81,17 @@ namespace Docu3cDemoWeb.Controllers
             if (docinfo.Count > 0)
             {
                 if (docinfo[0].docProps.ContainsKey("doc.type"))
-                    _html += "<h5 class='text-warning'>doc.type : " + docinfo[0].docProps["doc.type"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>doc.type : <span class='text-success'>" + docinfo[0].docProps["doc.type"].Value.ToString() + "</span></h6>";
                 if (docinfo[0].docProps.ContainsKey("org.name"))
-                    _html += "<h5>org.name : " + docinfo[0].docProps["org.name"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>org.name : <span class='text-success'>" + docinfo[0].docProps["org.name"].Value.ToString() + "</span></h6>";
                 if (docinfo[0].docProps.ContainsKey("cust.name"))
-                    _html += "<h5>cust.name : " + docinfo[0].docProps["cust.name"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>cust.name : <span class='text-success'>" + docinfo[0].docProps["cust.name"].Value.ToString() + "</span></h6>";
                 if (docinfo[0].docProps.ContainsKey("cust.dob"))
-                    _html += "<h5>cust.dob : " + docinfo[0].docProps["cust.dob"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>cust.dob : <span class='text-success'>" + docinfo[0].docProps["cust.dob"].Value.ToString() + "</span></h6>";
                 if (docinfo[0].docProps.ContainsKey("cust.ssn"))
-                    _html += "<h5>cust.ssn : " + docinfo[0].docProps["cust.ssn"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>cust.ssn : <span class='text-success'>" + docinfo[0].docProps["cust.ssn"].Value.ToString() + "</span></h6>";
                 if (docinfo[0].docProps.ContainsKey("cust.addr"))
-                    _html += "<h5>cust.addr : " + docinfo[0].docProps["cust.addr"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>cust.addr : <span class='text-success'>" + docinfo[0].docProps["cust.addr"].Value.ToString() + "</span></h6>";
 
                 if (fi["type"].ToString() == "UNKNOWN")
                     _html += "<a class='btn btn-primary float-right ml-2' href='/classify/" + pid + "/" + fid + "/" + docinfo[0].docProps["doc.type"].Value.ToString() + "'>Accept Classification</a>";
@@ -116,8 +116,6 @@ namespace Docu3cDemoWeb.Controllers
             var url = HttpContext.Request.Host.ToString();
             string fileurl = "https://" + url + fi["path"];
 
-            //fileurl = "https://docworksweb.azurewebsites.net/data/1593291961/ACCS_STMT_Aaron%20B%20McDaniel.pdf";
-
             var docinfo = await d3.ClassifyDocument("comp", fileurl);
             dsa.SaveFileProperties(pid,fid, docinfo);
 
@@ -125,17 +123,18 @@ namespace Docu3cDemoWeb.Controllers
             if (docinfo.Count > 0)
             {
                 if (docinfo[0].docProps.ContainsKey("doc.type"))
-                    _html += "<h5 class='text-warning'>doc.type : " + docinfo[0].docProps["doc.type"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>doc.type : <span class='text-success'>" + docinfo[0].docProps["doc.type"].Value.ToString() + "</span></h6>";
                 if (docinfo[0].docProps.ContainsKey("org.name"))
-                    _html += "<h5>org.name : " + docinfo[0].docProps["org.name"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>org.name : <span class='text-success'>" + docinfo[0].docProps["org.name"].Value.ToString() + "</span></h6>";
                 if (docinfo[0].docProps.ContainsKey("cust.name"))
-                    _html += "<h5>cust.name : " + docinfo[0].docProps["cust.name"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>cust.name : <span class='text-success'>" + docinfo[0].docProps["cust.name"].Value.ToString() + "</span></h6>";
                 if (docinfo[0].docProps.ContainsKey("cust.dob"))
-                    _html += "<h5>cust.dob : " + docinfo[0].docProps["cust.dob"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>cust.dob : <span class='text-success'>" + docinfo[0].docProps["cust.dob"].Value.ToString() + "</span></h6>";
                 if (docinfo[0].docProps.ContainsKey("cust.ssn"))
-                    _html += "<h5>cust.ssn : " + docinfo[0].docProps["cust.ssn"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>cust.ssn : <span class='text-success'>" + docinfo[0].docProps["cust.ssn"].Value.ToString() + "</span></h6>";
                 if (docinfo[0].docProps.ContainsKey("cust.addr"))
-                    _html += "<h5>cust.addr : " + docinfo[0].docProps["cust.addr"].Value.ToString() + "</h5>";
+                    _html += "<h6 class='text-warning'>cust.addr : <span class='text-success'>" + docinfo[0].docProps["cust.addr"].Value.ToString() + "</span></h6>";
+
 
                 if (fi["type"].ToString() == "UNKNOWN")
                     _html += "<a class='btn btn-primary float-right ml-2' href='/classify/" + pid + "/" + fid + "/" + docinfo[0].docProps["doc.type"].Value.ToString() + "'>Accept Classification</a>";
@@ -154,7 +153,48 @@ namespace Docu3cDemoWeb.Controllers
             var fi = dsa.SaveFileClassification(fid, ftype);
             ViewBag._file = fi["path"];
             ViewBag._doctype = fi["type"];
-            string _html = "<h3>Classification : " + fi["type"].ToString() + "</h3>";
+            string _html = "<h5 class='text-warning'>Document Classified as : " + fi["type"].ToString() + "</h5>";
+            ViewBag._html = _html;
+            ViewBag.pID = pid;
+            ViewBag.fID = fid;
+            return View("File");
+        }
+
+        [Route("comply/{pid?}/{fid?}")]
+        public IActionResult CheckFileCompliance(string pid, string fid)
+        {
+            DSActions dsa = new DSActions(_env);
+            var fi = dsa.GetFileInfo(fid);
+            var url = HttpContext.Request.Host.ToString();
+            string fileurl = "https://" + url + fi["path"];
+
+            ViewBag._file = fileurl;
+            ViewBag._doctype = fi["type"];
+
+            var docinfo = dsa.GetFileProperties(pid, fid);
+
+            string _html = "";
+            if (docinfo.Count > 0)
+            {
+                if (docinfo[0].docProps.ContainsKey("doc.type"))
+                    _html += "<h6 class='text-warning'>doc.type : <span class='text-success'>" + docinfo[0].docProps["doc.type"].Value.ToString() + "</span></h6>";
+                if (docinfo[0].docProps.ContainsKey("org.name"))
+                    _html += "<h6 class='text-warning'>org.name : <span class='text-success'>" + docinfo[0].docProps["org.name"].Value.ToString() + "</span></h6>";
+                if (docinfo[0].docProps.ContainsKey("cust.name"))
+                    _html += "<h6 class='text-warning'>cust.name : <span class='text-success'>" + docinfo[0].docProps["cust.name"].Value.ToString() + "</span></h6>";
+                if (docinfo[0].docProps.ContainsKey("cust.dob"))
+                    _html += "<h6 class='text-warning'>cust.dob : <span class='text-success'>" + docinfo[0].docProps["cust.dob"].Value.ToString() + "</span></h6>";
+                if (docinfo[0].docProps.ContainsKey("cust.ssn"))
+                    _html += "<h6 class='text-warning'>cust.ssn : <span class='text-success'>" + docinfo[0].docProps["cust.ssn"].Value.ToString() + "</span></h6>";
+                if (docinfo[0].docProps.ContainsKey("cust.addr"))
+                    _html += "<h6 class='text-warning'>cust.addr : <span class='text-success'>" + docinfo[0].docProps["cust.addr"].Value.ToString() + "</span></h6>";
+
+
+                if (fi["type"].ToString() == "UNKNOWN")
+                    _html += "<a class='btn btn-primary float-right ml-2' href='/classify/" + pid + "/" + fid + "/" + docinfo[0].docProps["doc.type"].Value.ToString() + "'>Accept Classification</a>";
+
+            }
+
             ViewBag._html = _html;
             ViewBag.pID = pid;
             ViewBag.fID = fid;
