@@ -97,7 +97,7 @@ namespace Docu3cDemoWeb
             return fileinfo;
         }
 
-        public void SaveFileProperties(string pID, string fID,List<docu3c> docs)
+        public void SaveFileProperties(string pID, string fID, docu3clist docs)
         {
             string binfile = _env.WebRootPath + "/data/" + pID + "/" + fID + ".bin";
             IFormatter formatter = new BinaryFormatter();
@@ -109,17 +109,19 @@ namespace Docu3cDemoWeb
             }
         }
 
-        public List<docu3c> GetFileProperties(string pID, string fID)
+        public docu3clist GetFileProperties(string pID, string fID)
         {
             string binfile = _env.WebRootPath + "/data/" + pID + "/" + fID + ".bin";
-            List<docu3c> docs = new List<docu3c>();
+            docu3clist docs = new docu3clist();
             if (!File.Exists(binfile)) return docs;
 
             IFormatter formatter = new BinaryFormatter();
             using (Stream stream = new FileStream(binfile, FileMode.Open, FileAccess.Read))
             {
-                docs = (List<docu3c>)formatter.Deserialize(stream);
+                docs = (docu3clist)formatter.Deserialize(stream);
             }
+            docs.html = docu3cAPI.SetDocHTML(docs);
+
             return docs;
         }
 
@@ -143,6 +145,54 @@ namespace Docu3cDemoWeb
                 ds.WriteXml(dsfileName);
             }
             return fileinfo;
+        }
+
+        public string CheckFileProperties(string pID, string fID)
+        {
+            //for the given portfolio, get ALL OTHER file properties. 
+            string _html = "";
+            docu3clist selfile = GetFileProperties(pID, fID);
+
+            var ds = InitDatSet();
+            if (ds.Tables.Contains("file"))
+            {
+                docu3clist currfile;
+                foreach (DataRow dr in ds.Tables["file"].Rows)
+                {
+                    if (dr["fID"].ToString() != fID && dr["fType"].ToString() != "UNKNOWN")
+                    {
+                        _html += "<h6 class='text-warning'>Comparing with : (" + dr["fType"]  + ")" + dr["fName"]  + "</h6>";
+                        currfile = GetFileProperties(pID, dr["fID"].ToString());
+                        var ret_html = CompareProperties(selfile, currfile);
+                        if(ret_html == "ERROR")
+                            _html += "<h6 class='text-warning'>Could not compare documents</h6>";
+                        else
+                            _html += ret_html;
+                    }
+                }
+            }
+
+            return _html;
+        }
+
+        private string CompareProperties(docu3clist sel, docu3clist curr)
+        {
+            string _html = "ERROR";
+            if (sel.Count == 0|| curr.Count == 0) return _html;
+            _html = "";
+            var seldoc = sel[0]; var currdoc = curr[0];
+            foreach (var key in seldoc.docProps.Keys)
+            {
+                if (key == "doc.type" || key == "org.name") continue;
+                if (!currdoc.docProps.ContainsKey(key)) continue;
+                if (!seldoc.docProps[key].Value.Replace(" ","").Equals(currdoc.docProps[key].Value.Replace(" ","")))
+                {
+                    _html += "<h6 class='text-warning'>Mismatch for " + key + ": <span class='text-success'>" + seldoc.docProps[key].Value.ToString() + " | vs | " + currdoc.docProps[key].Value.ToString() + "</span></h6>";
+                }
+            }
+
+            if (_html == "") _html += "<h6 class='text-success'>Documents Match!!!</h6>";
+            return _html;
         }
 
         public DataSet DeleteFile(string pID,string fID)
