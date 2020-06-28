@@ -1,6 +1,7 @@
 ﻿//https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/quickstarts/client-library?tabs=windows&pivots=programming-language-csharp
 //https://github.com/microsoft/OCR-Form-Tools
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -39,13 +40,34 @@ namespace Docu3cDemoWeb.Controllers
         {
             DSActions dsa = new DSActions(_env);
             ViewBag._ds = dsa.GetDataSet();
+            var value = DirSize(new DirectoryInfo(_env.WebRootPath + "/data/"));
+            ViewBag.DirInfo = (value / (double)Math.Pow(1024, 2)).ToString("0.00") + " MB";
             return View();
         }
 
+        private long DirSize(DirectoryInfo d)
+        {
+            long size = 0;
+            // Add file sizes.
+            FileInfo[] fis = d.GetFiles();
+            foreach (FileInfo fi in fis)
+            {
+                size += fi.Length;
+            }
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = d.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                size += DirSize(di);
+            }
+            return size;
+        }
         public IActionResult Clear()
         {
             DSActions dsa = new DSActions(_env);
             ViewBag._ds = dsa.ClearData();
+            var value = DirSize(new DirectoryInfo(_env.WebRootPath + "/data/"));
+            ViewBag.DirInfo = (value / (double)Math.Pow(1024, 2)).ToString("0.00") + " MB";
             return View("Settings");
         }
 

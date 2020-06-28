@@ -224,13 +224,14 @@ namespace Docu3cDemoWeb
             var ds = InitDatSet();
             if (ds.Tables.Contains("file"))
             {
-                string _filename = "";
+                string _filename = ""; string _filepropname = "";
                 ds.Tables["file"].AcceptChanges();
                 foreach (DataRow dr in ds.Tables["file"].Rows)
                 {
                     if (dr["fID"].ToString() == fID)
                     {
                         _filename = _env.WebRootPath + "/data/" + pID + "/" + dr["fName"].ToString();
+                        _filepropname = _env.WebRootPath + "/data/" + pID + "/" + fID + ".bin";
                         dr.Delete();
                     }
                 }
@@ -240,6 +241,8 @@ namespace Docu3cDemoWeb
                 if (File.Exists(_filename))
                     File.Delete(_filename);
 
+                if (File.Exists(_filepropname))
+                    File.Delete(_filepropname);
             }
 
 
