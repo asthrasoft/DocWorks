@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Html;
+@using System.Data;
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<div class="text-center1">
+    <a class="btn btn-primary float-right" role="button" asp-area="" asp-controller="Home" asp-action="Clear">Clear ALL data</a>
+    <h3 class="pl-3">Docu3C Settings</h3>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Portfolios</th>
+                        <th scope="col">Files</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag._ds.Tables.Contains("portfolio"))
+                    {
+                        @foreach (System.Data.DataRow dr in ViewBag._ds.Tables["portfolio"].Rows)
+                        {
+                            DataRow[] drs = ViewBag._ds.Tables["file"].Select("pID = '" + @dr["pID"] + "'");
+
+                            <tr>
+                                <td>@dr["pname"]</td>
+                                <td>@drs.Count().ToString()</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

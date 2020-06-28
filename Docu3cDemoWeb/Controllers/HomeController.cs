@@ -7,17 +7,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Docu3cDemoWeb.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace Docu3cDemoWeb.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IWebHostEnvironment _env;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment env)
         {
             _logger = logger;
+            _env = env;
         }
 
         public IActionResult Index()
@@ -31,6 +34,19 @@ namespace Docu3cDemoWeb.Controllers
             List<string> retstr = new List<string>();
             ViewBag.ResultHTML = retstr;
             return View();
+        }
+        public IActionResult Settings()
+        {
+            DSActions dsa = new DSActions(_env);
+            ViewBag._ds = dsa.GetDataSet();
+            return View();
+        }
+
+        public IActionResult Clear()
+        {
+            DSActions dsa = new DSActions(_env);
+            ViewBag._ds = dsa.ClearData();
+            return View("Settings");
         }
 
         public IActionResult LogOff()

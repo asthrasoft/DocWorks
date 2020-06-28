@@ -42,6 +42,14 @@ namespace Docu3cDemoWeb.Controllers
             return View();
         }
 
+        [Route("delport/{pid?}")]
+        public IActionResult DeletePortfolio(string pid)
+        {
+            DSActions dsa = new DSActions(_env);
+            ViewBag._ds = dsa.DelPortfolio(pid);
+            return View("Index");
+        }
+
         ////[Route("port/{id?}/upload")]
         ////public IActionResult upload(string id)
         ////{

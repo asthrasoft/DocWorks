@@ -25,6 +25,16 @@ namespace Docu3cDemoWeb
             return ds;
         }
 
+        public DataSet ClearData()
+        {
+            string dir = _env.WebRootPath + "/data/";
+            if (Directory.Exists(dir))
+                Directory.Delete(dir,true);
+
+            var ds = InitDatSet();
+            return ds;
+        }
+
         public DataSet SavePortfolio(string pName, string cName)
         {
             var ds = InitDatSet();
@@ -34,12 +44,26 @@ namespace Docu3cDemoWeb
             dr["pID"] = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
             dr["pName"] = pName;
             dr["cName"] = cName;
-            dr["docCount"] = 0;
-            dr["Classify"] = 0;
-            dr["Comply"] = 0;
-            dr["Comprehend"] = 0;
             dt.Rows.Add(dr);
 
+            ds.WriteXml(dsfileName);
+            return ds;
+        }
+
+        public DataSet DelPortfolio(string pID)
+        {
+            var ds = InitDatSet();
+            DataTable dt = ds.Tables["portfolio"];
+
+            ds.Tables["portfolio"].AcceptChanges();
+            foreach (DataRow dr in ds.Tables["portfolio"].Rows)
+            {
+                if (dr["pID"].ToString() == pID)
+                {
+                    dr.Delete();
+                }
+            }
+            ds.Tables["portfolio"].AcceptChanges();
             ds.WriteXml(dsfileName);
             return ds;
         }
@@ -252,26 +276,6 @@ namespace Docu3cDemoWeb
                 column = new DataColumn();
                 column.DataType = System.Type.GetType("System.String");
                 column.ColumnName = "cName";
-                dt.Columns.Add(column);
-
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.Int32");
-                column.ColumnName = "docCount";
-                dt.Columns.Add(column);
-
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.String");
-                column.ColumnName = "Classify";
-                dt.Columns.Add(column);
-
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.String");
-                column.ColumnName = "Comply";
-                dt.Columns.Add(column);
-
-                column = new DataColumn();
-                column.DataType = System.Type.GetType("System.String");
-                column.ColumnName = "Comprehend";
                 dt.Columns.Add(column);
 
                 ds.Tables.Add(dt);
