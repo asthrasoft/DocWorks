@@ -144,7 +144,7 @@ namespace Docu3cDemoWeb
             {
                 docs = (docu3clist)formatter.Deserialize(stream);
             }
-            docs.html = docu3cAPI.SetDocHTML(docs);
+            docs.html = docu3cAPIClient.SetDocHTML(docs);
 
             return docs;
         }
@@ -315,23 +315,5 @@ namespace Docu3cDemoWeb
             return ds;
         }
 
-        private string GenID()
-        {
-            //https://stackoverflow.com/questions/11313205/generate-a-unique-id
-            //https://codereview.stackexchange.com/questions/233452/generate-unique-id-in-c
-            //StringBuilder builder = new StringBuilder();
-            //Enumerable
-            //   .Range(65, 26)
-            //    .Select(e => ((char)e).ToString())
-            //    .Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
-            //    .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
-            //    .OrderBy(e => Guid.NewGuid())
-            //    .Take(6)
-            //    .ToList().ForEach(e => builder.Append(e));
-            //string id = builder.ToString();
-
-            string id = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
-            return id;
-        }
     }
 }

@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Docu3cDemoWeb", "Docu3cDemoWeb\Docu3cDemoWeb.csproj", "{015693A5-87D0-4C04-8FEC-2CFAA3158E90}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLClient", "MLClient\MLClient.csproj", "{0064E0AA-09EF-4F4A-9E75-09737C5E3550}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{015693A5-87D0-4C04-8FEC-2CFAA3158E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{015693A5-87D0-4C04-8FEC-2CFAA3158E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{015693A5-87D0-4C04-8FEC-2CFAA3158E90}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0064E0AA-09EF-4F4A-9E75-09737C5E3550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0064E0AA-09EF-4F4A-9E75-09737C5E3550}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0064E0AA-09EF-4F4A-9E75-09737C5E3550}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0064E0AA-09EF-4F4A-9E75-09737C5E3550}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

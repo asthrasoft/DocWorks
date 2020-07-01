@@ -1,6 +1,4 @@
-﻿//https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/quickstarts/client-library?tabs=windows&pivots=programming-language-csharp
-//https://github.com/microsoft/OCR-Form-Tools
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -100,19 +98,24 @@ namespace Docu3cDemoWeb.Controllers
         }
 
         [Route("identify/{pid?}/{fid?}")]
-        public async Task<IActionResult> ClassifyFile(string pid, string fid)
+        public IActionResult ClassifyFile(string pid, string fid)
         {
 
             DSActions dsa = new DSActions(_env);                      
             var fi = dsa.GetFileInfo(fid);
             ViewBag._file = fi["path"];
-            
-            docu3cAPI d3 = new docu3cAPI();
+
+            docu3cAPIClient d3 = new docu3cAPIClient();
             var url = HttpContext.Request.Host.ToString();
             string fileurl = "https://" + url + fi["path"];
 
-            var docinfo = await d3.ClassifyDocument("comp", fileurl);
-            dsa.SaveFileProperties(pid,fid, docinfo);
+            //Used for testing ONLY.
+            //fileurl = "https://docworksweb.azurewebsites.net/data/1593383499/ACC_XFR_Abraham%20C%20Diaz_.pdf";
+
+            var docinfo = d3.ClassifyDocument("comp", fileurl);
+            docinfo.html = docu3cAPIClient.SetDocHTML(docinfo);
+
+            dsa.SaveFileProperties(pid, fid, docinfo);
 
             var _html = docinfo.html;
             if (docinfo.Count > 0)

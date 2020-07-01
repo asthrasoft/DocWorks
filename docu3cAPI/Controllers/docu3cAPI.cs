@@ -22,22 +22,29 @@ namespace Docu3cDemoWeb
     [Serializable]
     public class docu3c
     {
-        public string docID;
-        public string docURL;
-        public string docType;
-        public string docModelID;
-        public string docParseErrorMsg;
-        public Dictionary<string,docu3cProp> docProps;
+        public string docID { get; set; }
+        public string docURL { get; set; }
+        public string docType { get; set; }
+        public string docModelID { get; set; }
+        public string docParseErrorMsg { get; set; }
+        public Dictionary<string,docu3cProp> docProps { get; set; }
     }
     [Serializable]
     public class docu3cProp
     {
-        public string Name;
-        public string Label;
-        public string Value;
-        public float Confidence;
-        public docu3cProp Child;
+        public string Name { get; set; }
+        public string Label { get; set; }
+        public string Value { get; set; }
+        public float Confidence { get; set; }
+        public docu3cProp Child { get; set; }
     }
+    [Serializable]
+    public class docu3cInput
+    {
+        public string doc_type { get; set; }
+        public string formUri { get; set; }
+    }
+
     public class docu3cAPI
     {
         string endpoint = "https://docworksformrecognizer.cognitiveservices.azure.com/";
@@ -81,7 +88,7 @@ namespace Docu3cDemoWeb
                     docs.Add(doc);
                 }
 
-                docs.html = docu3cAPI.SetDocHTML(docs);
+                //docs.html = docu3cAPI.SetDocHTML(docs);
                 return docs;
             }
             catch (Exception ex)
@@ -91,27 +98,6 @@ namespace Docu3cDemoWeb
                 docs.Add(doc);
                 return docs;
             }
-        }
-
-        public static string SetDocHTML(docu3clist docs)
-        {
-            string _html = "";
-            if (docs.Count > 0)
-            {
-                if (docs[0].docProps.ContainsKey("doc.type"))
-                    _html += "<h6 class='text-warning'>doc.type : <span class='text-success'>" + docs[0].docProps["doc.type"].Value.ToString() + "</span></h6>";
-                if (docs[0].docProps.ContainsKey("org.name"))
-                    _html += "<h6 class='text-warning'>org.name : <span class='text-success'>" + docs[0].docProps["org.name"].Value.ToString() + "</span></h6>";
-                if (docs[0].docProps.ContainsKey("cust.name"))
-                    _html += "<h6 class='text-warning'>cust.name : <span class='text-success'>" + docs[0].docProps["cust.name"].Value.ToString() + "</span></h6>";
-                if (docs[0].docProps.ContainsKey("cust.dob"))
-                    _html += "<h6 class='text-warning'>cust.dob : <span class='text-success'>" + docs[0].docProps["cust.dob"].Value.ToString() + "</span></h6>";
-                if (docs[0].docProps.ContainsKey("cust.ssn"))
-                    _html += "<h6 class='text-warning'>cust.ssn : <span class='text-success'>" + docs[0].docProps["cust.ssn"].Value.ToString() + "</span></h6>";
-                if (docs[0].docProps.ContainsKey("cust.addr"))
-                    _html += "<h6 class='text-warning'>cust.addr : <span class='text-success'>" + docs[0].docProps["cust.addr"].Value.ToString() + "</span></h6>";
-            }
-            return _html;
         }
 
         private string GetModelID(string doc_type)

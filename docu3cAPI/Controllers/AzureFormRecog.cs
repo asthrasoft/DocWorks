@@ -1,4 +1,7 @@
-﻿using System;
+﻿//https://docs.microsoft.com/en-us/azure/cognitive-services/form-recognizer/quickstarts/client-library?tabs=windows&pivots=programming-language-csharp
+//https://github.com/microsoft/OCR-Form-Tools
+
+using System;
 using System.IO;
 using System.Net;
 using System.Collections.Generic;
@@ -227,7 +230,7 @@ namespace Docu3cDemoWeb
         //public async Task ManageModels(string trainingFileUrl)
         //{
         //    var trainingClient = new FormTrainingClient(new Uri(endpoint), credential);
-            
+
         //    AccountProperties accountProperties = trainingClient.GetAccountProperties();
         //    Console.WriteLine($"Account has {accountProperties.CustomModelCount} models.");
         //    Console.WriteLine($"It can have at most {accountProperties.CustomModelLimit}" +
@@ -272,5 +275,25 @@ namespace Docu3cDemoWeb
         //    // Delete the model from the account.
         //    //trainingClient.DeleteModel(model.ModelId);
         //}
+
+        private string GenID()
+        {
+            //https://stackoverflow.com/questions/11313205/generate-a-unique-id
+            //https://codereview.stackexchange.com/questions/233452/generate-unique-id-in-c
+            //StringBuilder builder = new StringBuilder();
+            //Enumerable
+            //   .Range(65, 26)
+            //    .Select(e => ((char)e).ToString())
+            //    .Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
+            //    .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
+            //    .OrderBy(e => Guid.NewGuid())
+            //    .Take(6)
+            //    .ToList().ForEach(e => builder.Append(e));
+            //string id = builder.ToString();
+
+            string id = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
+            return id;
+        }
+
     }
 }

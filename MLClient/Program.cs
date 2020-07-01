@@ -18,7 +18,9 @@ namespace MLClient
 
         static void Main(string[] args)
         {
-            Program.PostRequest();
+            //Program.PostRequest();
+            docu3cAPIClient d3 = new docu3cAPIClient();
+            var docs = d3.ClassifyDocument("any", "https://docworksweb.azurewebsites.net/data/1593383499/ACC_XFR_Abraham%20C%20Diaz_.pdf");
             Console.ReadLine();
         }
 
@@ -64,5 +66,6 @@ namespace MLClient
             [JsonProperty("input_df")]
             public List<InputDf> Input_df_list { get; set; }
         }
+
     }
 }

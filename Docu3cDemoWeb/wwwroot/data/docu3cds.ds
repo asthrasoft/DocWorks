@@ -1,2 +1,20 @@
 <?xml version="1.0" standalone="yes"?>
-<docu3c />
+<docu3c>
+  <portfolio>
+    <pID>1593439435</pID>
+    <pName>P01</pName>
+    <cName>C01</cName>
+  </portfolio>
+  <file>
+    <fID>15785870</fID>
+    <pID>1593439435</pID>
+    <fName>ACC_XFR_Adam R Zavala_.pdf</fName>
+    <fType>Client_Account_Transfer_Form</fType>
+  </file>
+  <file>
+    <fID>15786113</fID>
+    <pID>1593439435</pID>
+    <fName>ACC_XFR_Alan C Wages_.pdf</fName>
+    <fType>Client_Account_Transfer_Form</fType>
+  </file>
+</docu3c>
